@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>Hello!</h1>
+<h1>Hello! Its Main page</h1>
+<table border="1px">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Group Name</th>
+        <th scope="col">Command List</th>
+    </tr>
+
+    <tr th:each="group : ${groupList}">
+        <td>
+            <span th:text="${group.getId()}"></span>
+        </td>
+
+        <td>
+            <span th:text="${group.getName()}"></span>
+        </td>
+
+        <td>
+            <span th:text="${group.listTeamsToString()}"></span>
+        </td>
+    </tr>
+    </thead>
+</table>
 </body>
 </html>
