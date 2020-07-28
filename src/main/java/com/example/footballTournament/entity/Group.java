@@ -2,8 +2,7 @@ package com.example.footballTournament.entity;
 
 import javax.persistence.*;
 import java.util.List;
-//Команды объединены в группы (4 команды в группе)
-// Групп 8 штук (обычно именуют от A до H). Пример: "Group G"
+
 @Entity
 @Table(name = "groups")
 public class Group {
