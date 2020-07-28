@@ -20,4 +20,9 @@ public class MainController {
         this.teamService = teamService;
     }
 
+    @GetMapping("/")
+    public String getMainPage() {
+        return "main";
+    }
+
 }
