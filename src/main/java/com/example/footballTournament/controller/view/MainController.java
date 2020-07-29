@@ -1,4 +1,4 @@
-package com.example.footballTournament.controller;
+package com.example.footballTournament.controller.view;
 
 import com.example.footballTournament.entity.Game;
 import com.example.footballTournament.entity.Group;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,8 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String getMainPage(ModelMap modelMap) {
-        List<Group> groupList = groupService.getAllGroups();
-        modelMap.addAttribute("groupList", groupList);
-        return "main";
+    public ModelAndView getMainPage() {
+        return new ModelAndView("main");
     }
 
 }

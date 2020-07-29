@@ -8,26 +8,18 @@
 <h1>Hello! Its Main page</h1>
 <table border="1px">
     <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Group Name</th>
-        <th scope="col">Command List</th>
-    </tr>
-
-    <tr th:each="group : ${groupList}">
-        <td>
-            <span th:text="${group.getId()}"></span>
-        </td>
-
-        <td>
-            <span th:text="${group.getName()}"></span>
-        </td>
-
-        <td>
-            <span th:text="${group.listTeamsToString()}"></span>
-        </td>
-    </tr>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Group Name</th>
+            <th scope="col">Command List</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+        </tr>
     </thead>
+
+    <tbody id="groups">
+    </tbody>
+
 </table>
 </body>
 </html>
