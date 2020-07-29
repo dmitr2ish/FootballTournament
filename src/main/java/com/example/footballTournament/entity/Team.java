@@ -1,5 +1,7 @@
 package com.example.footballTournament.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,20 +13,15 @@ public class Team {
     private Long id;
     private String name;
     @ManyToMany
-    @JoinTable(name = "game_team",
+    @JoinTable(name = "ft_game_team",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private List<Game> gameList;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "group_id", nullable = false)
-    private Group group;
-
-    public Team(String name, List<Game> gameList, Group group) {
+    public Team(String name, List<Game> gameList) {
         this.name = name;
         this.gameList = gameList;
-        this.group = group;
     }
 
     public Team() {
@@ -42,17 +39,7 @@ public class Team {
         return gameList;
     }
 
-    public void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
-    }
 
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
 
     public Long getId() {
         return id;

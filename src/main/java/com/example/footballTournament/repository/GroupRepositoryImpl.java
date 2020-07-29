@@ -22,6 +22,7 @@ public class GroupRepositoryImpl implements GroupRepository {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Group> getAllGroups() {
         return entityManager.createQuery("select c from Group c").getResultList();
     }
@@ -33,7 +34,7 @@ public class GroupRepositoryImpl implements GroupRepository {
 
     @Override
     public Group getByGroupId(Long id) {
-        return null;
+        return entityManager.find(Group.class, id);
     }
 
     @Override

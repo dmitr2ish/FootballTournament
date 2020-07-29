@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public Group getByGroupId(Long id) {
-        return null;
+        return groupRepository.getByGroupId(id);
     }
 
     @Override

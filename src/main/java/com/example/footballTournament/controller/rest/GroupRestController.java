@@ -1,12 +1,16 @@
 package com.example.footballTournament.controller.rest;
 
+import com.example.footballTournament.entity.Game;
 import com.example.footballTournament.entity.Group;
+import com.example.footballTournament.entity.Team;
 import com.example.footballTournament.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,5 +27,11 @@ public class GroupRestController {
     @GetMapping("/list")
     public List<Group> getListGroup() {
         return service.getAllGroups();
+    }
+
+    @GetMapping("/team/{id}")
+    public List<Team> getAllTeamInGroup(@PathVariable(name = "id")Long id) {
+        Group group = service.getByGroupId(id);
+        return group.getTeams();
     }
 }

@@ -34,11 +34,12 @@ public class MainController {
         Game game2 = new Game("HOBBITS",10);
         gameService.saveGame(game1);
         gameService.saveGame(game2);
-        Group groupA = new Group("A", new ArrayList<Team>());
-        Team team1 = new Team("ORKS", gameService.getAllGames(), groupA);
-        Team team2 = new Team("HOBBITS", gameService.getAllGames(), groupA);
+        Team team1 = new Team("ORKS", gameService.getAllGames());
+        Team team2 = new Team("HOBBITS", gameService.getAllGames());
         teamService.saveTeam(team1);
         teamService.saveTeam(team2);
+        Group groupA = new Group("A", teamService.getAllTeams());
+        groupService.saveGroup(groupA);
         return "redirect:/";
     }
 
