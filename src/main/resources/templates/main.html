@@ -1,33 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+
+
+    <title>Groups' list page</title>
 </head>
+
 <body>
-<h1>Hello! Its Main page</h1>
-<table border="1px">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Group Name</th>
-        <th scope="col">Command List</th>
-    </tr>
+    <!-- Group information page -->
+    <div id="group-container" class="container">
+        <div class="row tables_name_panel border">
+            <h5>Groups' list</h5>
+        </div>
 
-    <tr th:each="group : ${groupList}">
-        <td>
-            <span th:text="${group.getId()}"></span>
-        </td>
+        <div class="row">
+            <div class="table_container col">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Group name</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
 
-        <td>
-            <span th:text="${group.getName()}"></span>
-        </td>
+                    <tbody id="groupList">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-        <td>
-            <span th:text="${group.listTeamsToString()}"></span>
-        </td>
-    </tr>
-    </thead>
-</table>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(function () {
+        $('#groupList').empty();
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/group/list',
+            success: function (list) {
+                console.log("list: ")
+                console.log(list)
+                list.forEach(group =>
+                    $('#groupList').append(
+                        "<tr>" +
+                        "<td>"+ group.id +"</td>" +
+                        "<td>"+ group.name +"</td>" +
+                        "<td><button type='button' class='btn btn-info' onclick='editUserForm(" + group.id + ")'>Edit</button></td>" +
+                        "<td><button type='button' class='btn btn-danger' onclick='deleteUserForm(" + group.id + ")'>Delete</button></td>" +
+                        "</tr>"
+                    )
+                )
+            }
+
+        })
+    })
+</script>
 </body>
 </html>

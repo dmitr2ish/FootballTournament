@@ -1,5 +1,7 @@
 package com.example.footballTournament.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +12,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Team> teams;
 
     public Group() {
@@ -31,6 +34,7 @@ public class Group {
             listTeams.append(teams.get(i).getName());
             listTeams.append(", ");
         }
+        listTeams.toString();
         return listTeams.toString();
     }
 

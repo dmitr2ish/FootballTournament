@@ -15,7 +15,6 @@ public class Game {
     public Game() {
     }
 
-
     public Game(String commandName, Integer points) {
         this.commandName = commandName;
         this.points = points;
