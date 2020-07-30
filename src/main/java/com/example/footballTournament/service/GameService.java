@@ -6,12 +6,20 @@ import java.util.List;
 
 public interface GameService {
     List<Game> getAllGames();
+
     List<Game> getAllGamesByTeamName(String teamName);
+
     void deleteAllGames();
+
     Game getByGameId(Long id);
+
     Game saveGame(Game game);
+
     void updateGame(Game game);
+
     Integer getNumOfWins(String teamName);
+
     Integer getNumOfLose(String teamName);
+
     Integer getNumOfDraw(String teamName);
 }

@@ -3,6 +3,7 @@ package com.example.footballTournament.repository;
 import com.example.footballTournament.entity.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -38,6 +39,7 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
+    @Transactional
     public Group saveGroup(Group group) {
         try {
             entityManager.persist(group);

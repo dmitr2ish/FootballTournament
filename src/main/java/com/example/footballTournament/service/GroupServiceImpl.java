@@ -98,6 +98,11 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
     }
 
     @Override
+    public List<Team> getAllTeamsByGroupName(String groupName) {
+        return teamRepository.getAllTeamsByGroupName(groupName);
+    }
+
+    @Override
     public List<Team> getAllTeams() {
         return teamRepository.getAllTeams();
     }

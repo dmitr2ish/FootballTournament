@@ -22,8 +22,17 @@ public class TeamRepositoryImpl implements TeamRepository {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Team> getAllTeams() {
         return entityManager.createQuery("select c from Team c").getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Team> getAllTeamsByGroupName(String groupName) {
+        return entityManager.createQuery("select c from Team c where c.nameOfGroup = :groupName")
+                .setParameter("groupName", groupName)
+                .getResultList();
     }
 
     @Override
