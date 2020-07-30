@@ -8,16 +8,18 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String commandName;
-    private Integer points;
+    private String firstTeam;
+    private String secondTeam;
+
+    private String winner;
 
     public Game() {
     }
 
-
-    public Game(String commandName, Integer points) {
-        this.commandName = commandName;
-        this.points = points;
+    public Game(String firstTeam, String secondTeam, String winner) {
+        this.firstTeam = firstTeam;
+        this.secondTeam = secondTeam;
+        this.winner = winner;
     }
 
     public Long getId() {
@@ -28,19 +30,27 @@ public class Game {
         this.id = id;
     }
 
-    public String getCommandName() {
-        return commandName;
+    public String getFirstTeam() {
+        return firstTeam;
     }
 
-    public void setCommandName(String commandName) {
-        this.commandName = commandName;
+    public void setFirstTeam(String firstTeam) {
+        this.firstTeam = firstTeam;
     }
 
-    public Integer getPoints() {
-        return points;
+    public String getSecondTeam() {
+        return secondTeam;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void setSecondTeam(String secondTeam) {
+        this.secondTeam = secondTeam;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 }

@@ -2,6 +2,7 @@ package com.example.footballTournament.controller.rest;
 
 import com.example.footballTournament.entity.Group;
 import com.example.footballTournament.entity.Team;
+import com.example.footballTournament.service.GameService;
 import com.example.footballTournament.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,11 @@ import java.util.List;
 public class GroupRestController {
 
     final private GroupService service;
+    final private GameService gameService;
 
     @Autowired
-    public GroupRestController(GroupService service) {
+    public GroupRestController(GroupService service, GameService gameService) {
+        this.gameService = gameService;
         this.service = service;
     }
 

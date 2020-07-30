@@ -22,8 +22,17 @@ public class GameRepositoryImpl implements GameRepository {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Game> getAllGames() {
         return entityManager.createQuery("select c from Game c").getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Game> getAllGamesByTeamName(String teamName) {
+        return entityManager.createQuery("select c from Game c where c.firstTeam = :teamName or c.secondTeam = :teamName")
+                .setParameter("teamName", teamName)
+                .getResultList();
     }
 
     @Override
@@ -49,6 +58,38 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public void updateGame(Game game) {
+
+    }
+
+    @Override
+    public Integer getNumOfWins(String teamName) {
+        return entityManager.createQuery("select c from Game c  WHERE c.winner = :teamName")
+                .setParameter("teamName", teamName)
+                .getResultList().size();
+    }
+
+    @Override
+    public Integer getNumOfLoose(String teamName) {
+        int totalNumOfGames = entityManager.createQuery("select c from Game c WHERE c.firstTeam = :teamName or c.secondTeam = :teamName")
+                .setParameter("teamName", teamName)
+                .getResultList().size();
+
+        log.info("----===== COUNT TOTAL GAMES: " + totalNumOfGames + "=====-----");
+
+        Integer numOfWin = entityManager.createQuery("select c from Game c  WHERE c.winner = :teamName")
+                .setParameter("teamName", teamName)
+                .getResultList().size();
+
+        log.info("----===== COUNT WIN GAMES: " + numOfWin + "=====-----");
+        log.info("----===== COUNT DRAW GAMES: " + getNumOfDraw() + "=====-----");
+
+        return totalNumOfGames - (numOfWin + getNumOfDraw());
+    }
+
+    @Override
+    public Integer getNumOfDraw() {
+        return entityManager.createQuery("select c from Game c WHERE c.winner = 'draw'")
+                .getResultList().size();
 
     }
 }

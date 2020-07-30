@@ -58,6 +58,11 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
     }
 
     @Override
+    public List<Game> getAllGamesByTeamName(String teamName) {
+        return gameRepository.getAllGamesByTeamName(teamName);
+    }
+
+    @Override
     public void deleteAllGames() {
 
     }
@@ -75,6 +80,21 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
     @Override
     public void updateGame(Game game) {
 
+    }
+
+    @Override
+    public Integer getNumOfWins(String teamName) {
+        return gameRepository.getNumOfWins(teamName);
+    }
+
+    @Override
+    public Integer getNumOfLoose(String teamName) {
+        return gameRepository.getNumOfLoose(teamName);
+    }
+
+    @Override
+    public Integer getNumOfDraw() {
+        return gameRepository.getNumOfDraw();
     }
 
     @Override

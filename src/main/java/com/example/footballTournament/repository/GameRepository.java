@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface GameRepository {
     List<Game> getAllGames();
+    List<Game> getAllGamesByTeamName(String teamName);
     void deleteAllGames();
     Game getByGameId(Long id);
     Game saveGame(Game game);
     void updateGame(Game game);
+    Integer getNumOfWins(String teamName);
+    Integer getNumOfLoose(String teamName);
+    Integer getNumOfDraw();
 }
