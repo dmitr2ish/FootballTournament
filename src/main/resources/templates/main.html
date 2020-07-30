@@ -35,6 +35,73 @@
     </tbody>
 </table>
 
+<!-- edit modal -->
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-group" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-group">Edit group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="/api/group/update" id="editForm" method="post">
+                    <div class="form-group">
+                        <label for="editGroupId" class="col-form-label">Id</label>
+                        <input type="text" class="form-control" id="editGroupId" readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editGroupName" class="col-form-label">Group name</label>
+                        <input type="text" class="form-control" id="editGroupName">
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editGroupFromModal">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-group" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-group">Delete group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="/api/group/delete" id="deleteForm" method="delete">
+                    <div class="form-group">
+                        <label for="deleteGroupId" class="col-form-label">Id</label>
+                        <input type="text" class="form-control" id="deleteGroupId" readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deleteGroupName" class="col-form-label">Group name</label>
+                        <input type="text" class="form-control" id="deleteGroupName" readonly="readonly">
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="deleteGroupFromModal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -65,11 +132,43 @@
                         "<td>" + group.name + "</td>" +
 
 
-                        "<td><button type='button' onclick='showTeamInGroupList(" + group.id + ")'>Show team</button></td>" +
-                        "<td><button type='button' onclick='editGroup(" + group.id + ")'>Edit group</button></td>" +
-                        "<td><button type='button' onclick='deleteGroup(" + group.id + ")'>Delete group</button></td>" +
+                        "<td><button type='button' onclick='showTeamInGroupList(" + group.id + ")'>+</button></td>" +
+                        "<td><button type='button' class=\"btn btn-primary\" onclick='editGroupFrom(" + group.id + ")'>edit</button></td>" +
+                        "<td><button type='button' class=\"btn btn-danger\" onclick='deleteGroupForm(" + group.id + ")'>delete</button></td>" +
                         "</tr>"
                     ))
+            }
+        })
+    }
+
+    function editGroupFrom(id) {
+        console.log(id);
+        $.ajax({
+            url: '/api/group/' + id,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (group) {
+                console.log("group: " + group.name);
+                $('#editGroupId').val(group.id);
+                $('#editGroupName').val(group.name);
+                $('#edit-modal').modal('show');
+            }
+        })
+    }
+
+    function deleteGroupForm(id) {
+        console.log(id);
+        $.ajax({
+            url: '/api/group/' + id,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (group) {
+                console.log("group: " + group.name);
+                $('#deleteGroupId').val(group.id);
+                $('#deleteGroupName').val(group.name);
+                $('#delete-modal').modal('show');
             }
         })
     }
