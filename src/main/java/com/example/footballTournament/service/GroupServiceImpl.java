@@ -88,13 +88,13 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
     }
 
     @Override
-    public Integer getNumOfLoose(String teamName) {
-        return gameRepository.getNumOfLoose(teamName);
+    public Integer getNumOfLose(String teamName) {
+        return gameRepository.getNumOfLose(teamName);
     }
 
     @Override
-    public Integer getNumOfDraw() {
-        return gameRepository.getNumOfDraw();
+    public Integer getNumOfDraw(String teamName) {
+        return gameRepository.getNumOfDraw(teamName);
     }
 
     @Override

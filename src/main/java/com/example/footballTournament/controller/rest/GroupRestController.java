@@ -17,11 +17,9 @@ import java.util.List;
 public class GroupRestController {
 
     final private GroupService service;
-    final private GameService gameService;
 
     @Autowired
-    public GroupRestController(GroupService service, GameService gameService) {
-        this.gameService = gameService;
+    public GroupRestController(GroupService service) {
         this.service = service;
     }
 

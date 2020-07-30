@@ -12,6 +12,6 @@ public interface GameRepository {
     Game saveGame(Game game);
     void updateGame(Game game);
     Integer getNumOfWins(String teamName);
-    Integer getNumOfLoose(String teamName);
-    Integer getNumOfDraw();
+    Integer getNumOfLose(String teamName);
+    Integer getNumOfDraw(String teamName);
 }

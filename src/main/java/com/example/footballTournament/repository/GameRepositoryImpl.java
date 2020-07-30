@@ -69,27 +69,34 @@ public class GameRepositoryImpl implements GameRepository {
     }
 
     @Override
-    public Integer getNumOfLoose(String teamName) {
+    public Integer getNumOfLose(String teamName) {
         int totalNumOfGames = entityManager.createQuery("select c from Game c WHERE c.firstTeam = :teamName or c.secondTeam = :teamName")
                 .setParameter("teamName", teamName)
                 .getResultList().size();
 
         log.info("----===== COUNT TOTAL GAMES: " + totalNumOfGames + "=====-----");
 
-        Integer numOfWin = entityManager.createQuery("select c from Game c  WHERE c.winner = :teamName")
+        int numOfWin = entityManager.createQuery("select c from Game c  WHERE c.winner = :teamName")
                 .setParameter("teamName", teamName)
                 .getResultList().size();
 
         log.info("----===== COUNT WIN GAMES: " + numOfWin + "=====-----");
-        log.info("----===== COUNT DRAW GAMES: " + getNumOfDraw() + "=====-----");
 
-        return totalNumOfGames - (numOfWin + getNumOfDraw());
+        int numOfDraw = getNumOfDraw(teamName);
+
+        log.info("----===== COUNT DRAW GAMES: " + numOfDraw + "=====-----");
+
+        return totalNumOfGames - (numOfWin + numOfDraw);
     }
 
     @Override
-    public Integer getNumOfDraw() {
-        return entityManager.createQuery("select c from Game c WHERE c.winner = 'draw'")
+    public Integer getNumOfDraw(String teamName) {
+        return entityManager.createQuery(
+                "select c from Game c WHERE " +
+                        "c.winner = 'draw' and " +
+                        "c.firstTeam = :teamName or " +
+                        "c.secondTeam = :teamName")
+                .setParameter("teamName", teamName)
                 .getResultList().size();
-
     }
 }

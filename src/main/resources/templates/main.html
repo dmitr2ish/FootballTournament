@@ -30,8 +30,8 @@
     </thead>
 
     <tbody id="groupid">
-        <table border="1px" id="teamid">
-        </table>
+    <table border="1px" id="teamid">
+    </table>
     </tbody>
 </table>
 
@@ -49,6 +49,9 @@
 
 <script>
     $(function () {
+        getNumOfWin("ORKS");
+        getNumOfLose("ORKS");
+        getNumOfDraw("ORKS");
         updateGroupList();
     })
 
@@ -107,6 +110,35 @@
         $('#teamid').addClass('container-hidden');
     }
 
+    function getNumOfWin(name) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/game/win/team/' + name,
+            success: function (number) {
+                console.log("win: " + number);
+            }
+        })
+    }
+
+    function getNumOfLose(name) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/game/lose/team/' + name,
+            success: function (number) {
+                console.log("lose: " + number);
+            }
+        })
+    }
+
+    function getNumOfDraw(name) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/game/draw/team/' + name,
+            success: function (number) {
+                console.log("draw: " + number);
+            }
+        })
+    }
 
 </script>
 </body>
