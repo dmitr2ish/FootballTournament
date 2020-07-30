@@ -8,6 +8,12 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
 
+    <style>
+        .container-hidden {
+            display: none;
+        }
+    </style>
+
     <title>Title</title>
 </head>
 <body>
@@ -24,20 +30,10 @@
     </thead>
 
     <tbody id="groupid">
-        <table border="1px">
-            <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Team Name</th>
-            </tr>
-            </thead>
-
-            <tbody id="teamid">
-            </tbody>
+        <table border="1px" id="teamid">
         </table>
     </tbody>
 </table>
-
 
 
 <!-- Optional JavaScript -->
@@ -54,8 +50,6 @@
 <script>
     $(function () {
         updateGroupList();
-        updateTeamInGroupList(1); //TODO переделать на нажатие по кнопке отображение списка команд
-
     })
 
     function updateGroupList() {
@@ -66,19 +60,22 @@
                 console.log(groupList);
                 groupList.forEach(group =>
                     $('#groupid').append(
-                        "<tr>"+
+                        "<tr>" +
                         "<td>" + group.id + "</td>" +
                         "<td>" + group.name + "</td>" +
-                        "<td>" + group.name + "</td>" +
-                        "<td>" + group.name + "</td>" +
-                        "<td>" + group.name + "</td>" +
+
+
+                        "<td><button type='button' onclick='showTeamInGroupList(" + group.id + ")'>Show team</button></td>" +
+                        "<td><button type='button' onclick='editGroup(" + group.id + ")'>Edit group</button></td>" +
+                        "<td><button type='button' onclick='deleteGroup(" + group.id + ")'>Delete group</button></td>" +
                         "</tr>"
                     ))
             }
         })
     }
 
-    function updateTeamInGroupList(id) {
+    function showTeamInGroupList(id) {
+        $('#teamid').removeClass('container-hidden').empty();
         console.log('id: ' + id);
         $.ajax({
             type: 'GET',
@@ -87,15 +84,31 @@
             contentType: 'application/json',
             success: function (teamListInGroup) {
                 console.log(teamListInGroup);
+                $('#teamid').append(
+                    "<tr>" +
+                    "<th scope=\"col\">Team Name</th>" +
+                    "<th scope=\"col\">Points</th>" +
+                    "<th scope=\"col\">Edit</th>" +
+                    "<th scope=\"col\">Delete</th>" +
+                    "<th scope=\"col\"><button type='button' onclick='closeTeamsInGroup()'>X</button></th>" +
+                    "</tr>"
+                )
                 teamListInGroup.forEach(team =>
                     $('#teamid').append(
-                        "<tr>"+
+                        "<tr>" +
                         "<td>" + team.name + "</td>" +
+                        "<td>" + team.gameList.map(game => game.points) + "</td>" +
                         "</tr>"
                     ))
             }
         })
     }
+
+    function closeTeamsInGroup() {
+        $('#teamid').addClass('container-hidden');
+    }
+
+
 </script>
 </body>
 </html>
