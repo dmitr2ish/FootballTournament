@@ -10,17 +10,17 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String nameOfGroup;
+    private Long idOfGroup;
     @ManyToMany
     @JoinTable(name = "ft_game_team",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<Game> gameList;
 
-    public Team(String name, List<Game> gameList, String nameOfGroup) {
+    public Team(String name, List<Game> gameList, Long idOfGroup) {
         this.name = name;
         this.gameList = gameList;
-        this.nameOfGroup = nameOfGroup;
+        this.idOfGroup = idOfGroup;
     }
 
     public Team() {
@@ -43,19 +43,19 @@ public class Team {
         this.id = id;
     }
 
-    public String getNameOfGroup() {
-        return nameOfGroup;
-    }
-
-    public void setNameOfGroup(String nameOfGroup) {
-        this.nameOfGroup = nameOfGroup;
-    }
-
     public List<Game> getGameList() {
         return gameList;
     }
 
     public void setGameList(List<Game> gameList) {
         this.gameList = gameList;
+    }
+
+    public Long getIdOfGroup() {
+        return idOfGroup;
+    }
+
+    public void setIdOfGroup(Long idOfGroup) {
+        this.idOfGroup = idOfGroup;
     }
 }

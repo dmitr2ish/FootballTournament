@@ -5,7 +5,7 @@ import com.example.footballTournament.entity.Team;
 import java.util.List;
 
 public interface TeamService {
-    List<Team> getAllTeamsByGroupName(String groupName);
+    List<Team> getAllTeamsByGroupName(Long groupId);
 
     List<Team> getAllTeams();
 

@@ -103,8 +103,8 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
-    public List<Team> getAllTeamsByGroupName(String groupName) {
-        return teamRepository.getAllTeamsByGroupName(groupName);
+    public List<Team> getAllTeamsByGroupName(Long groupId) {
+        return teamRepository.getAllTeamsByGroupName(groupId);
     }
 
     @Override

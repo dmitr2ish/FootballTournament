@@ -102,6 +102,9 @@ public class MainController {
      */
     private void createGroup(String groupName, List<String> teamList) {
         //step 1
+        // creating a group in the database, because we need its ID to use it for  link the group and the command
+        Group group = groupService.saveGroup(new Group(groupName, null));
+        //step 2
         //creating list of 6 games in group where winner is first team
         List<Game> gameList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -112,27 +115,28 @@ public class MainController {
                         teamList.get(i)));  //winner
             }
         }
-        //step 2
+        //step 3
         //saving games in database
         for (Game game : gameList) {
             gameService.saveGame(game);
         }
-        //step 3
+        //step 4
         //creating list of 4 teams from one group
         List<Team> teamListGroup = new ArrayList<>();
         for (String teamName : teamList) {
             teamListGroup.add(new Team(
                     teamName,
                     gameService.getAllGamesByTeamName(teamName),
-                    groupName));
+                    group.getId()));
         }
-        //step 4
+        //step 5
         //saving team in database
         for (Team teamName : teamListGroup) {
             teamService.saveTeam(teamName);
         }
-        //step 5
-        //saving group in database
-        groupService.saveGroup(new Group(groupName, teamService.getAllTeamsByGroupName(groupName)));
+        //step 6
+        //set teams in this group and save in data base this group
+        group.setTeams(teamService.getAllTeamsByGroupName(group.getId()));
+        groupService.updateGroup(group);
     }
 }
