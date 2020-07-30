@@ -5,6 +5,8 @@ import com.example.footballTournament.entity.Team;
 import com.example.footballTournament.service.GameService;
 import com.example.footballTournament.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +26,19 @@ public class GroupRestController {
     }
 
     @GetMapping("/list")
-    public List<Group> getListGroup() {
-        return service.getAllGroups();
+    public ResponseEntity<List<Group>> getListGroup() {
+        List<Group> groupList =service.getAllGroups();
+        return (groupList != null && !groupList.isEmpty())
+                ? new ResponseEntity<>(groupList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    //show all teams in current group by id
     @GetMapping("/team/{id}")
-    public List<Team> getAllTeamInGroup(@PathVariable(name = "id")Long id) {
-        Group group = service.getByGroupId(id);
-        return group.getTeams();
+    public ResponseEntity<List<Team>> getAllTeamInGroup(@PathVariable(name = "id")Long id) {
+        List<Team> teamList = service.getByGroupId(id).getTeams();
+        return (teamList != null && !teamList.isEmpty())
+                ? new ResponseEntity<>(teamList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
