@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
-
+//TODO сделать с роллбэками и логгером на экзепшенах во всех имплементациях
 @Repository
 public class TeamRepositoryImpl implements TeamRepository {
 
@@ -37,12 +37,12 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     @Override
     public void deleteAllTeams() {
-
+        entityManager.createQuery("delete from Team");
     }
 
     @Override
     public Team getByTeamId(Long id) {
-        return null;
+        return entityManager.find(Team.class, id);
     }
 
     @Override
@@ -58,6 +58,6 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     @Override
     public void updateTeam(Team team) {
-
+        entityManager.merge(team);
     }
 }

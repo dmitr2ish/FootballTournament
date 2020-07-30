@@ -37,12 +37,12 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public void deleteAllGames() {
-
+        entityManager.createQuery("delete from Game ");
     }
 
     @Override
     public Game getByGameId(Long id) {
-        return null;
+        return entityManager.find(Game.class, id);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public void updateGame(Game game) {
-
+        entityManager.merge(game);
     }
 
     @Override

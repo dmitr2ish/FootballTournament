@@ -30,7 +30,7 @@ public class GroupRepositoryImpl implements GroupRepository {
 
     @Override
     public void deleteAllGroups() {
-
+        entityManager.createQuery("delete from Group").executeUpdate();
     }
 
     @Override
@@ -51,7 +51,12 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
-    public void updateGroup(Group team) {
+    public void updateGroup(Group group) {
+        entityManager.merge(group);
+    }
 
+    @Override
+    public void deleteGroup(Group group) {
+        entityManager.remove(group);
     }
 }

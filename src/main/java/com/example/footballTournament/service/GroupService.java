@@ -9,6 +9,8 @@ public interface GroupService {
 
     void deleteAllGroups();
 
+    void deleteGroup(Group group);
+
     Group getByGroupId(Long id);
 
     Group saveGroup(Group group);

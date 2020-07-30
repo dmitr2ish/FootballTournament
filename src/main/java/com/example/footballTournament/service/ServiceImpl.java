@@ -14,14 +14,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class GroupServiceImpl implements GroupService, GameService, TeamService {
+public class ServiceImpl implements GroupService, GameService, TeamService {
 
     private GroupRepository groupRepository;
     private TeamRepository teamRepository;
     private GameRepository gameRepository;
 
     @Autowired
-    public GroupServiceImpl(GroupRepository groupRepository, TeamRepository teamRepository, GameRepository gameRepository) {
+    public ServiceImpl(GroupRepository groupRepository, TeamRepository teamRepository, GameRepository gameRepository) {
         this.groupRepository = groupRepository;
         this.teamRepository = teamRepository;
         this.gameRepository = gameRepository;
@@ -34,7 +34,12 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void deleteAllGroups() {
+        groupRepository.deleteAllGroups();
+    }
 
+    @Override
+    public void deleteGroup(Group group) {
+        groupRepository.deleteGroup(group);
     }
 
     @Override
@@ -49,7 +54,7 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void updateGroup(Group group) {
-
+        groupRepository.updateGroup(group);
     }
 
     @Override
@@ -64,12 +69,12 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void deleteAllGames() {
-
+        gameRepository.deleteAllGames();
     }
 
     @Override
     public Game getByGameId(Long id) {
-        return null;
+        return gameRepository.getByGameId(id);
     }
 
     @Override
@@ -79,7 +84,7 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void updateGame(Game game) {
-
+        gameRepository.updateGame(game);
     }
 
     @Override
@@ -109,12 +114,12 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void deleteAllTeams() {
-
+        teamRepository.deleteAllTeams();
     }
 
     @Override
     public Team getByTeamId(Long id) {
-        return null;
+        return teamRepository.getByTeamId(id);
     }
 
     @Override
@@ -124,6 +129,6 @@ public class GroupServiceImpl implements GroupService, GameService, TeamService 
 
     @Override
     public void updateTeam(Team team) {
-
+        teamRepository.updateTeam(team);
     }
 }
