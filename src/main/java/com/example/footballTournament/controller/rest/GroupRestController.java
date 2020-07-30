@@ -1,6 +1,5 @@
 package com.example.footballTournament.controller.rest;
 
-import com.example.footballTournament.entity.Game;
 import com.example.footballTournament.entity.Group;
 import com.example.footballTournament.entity.Team;
 import com.example.footballTournament.service.GroupService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
