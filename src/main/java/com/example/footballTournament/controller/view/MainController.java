@@ -7,15 +7,12 @@ import com.example.footballTournament.service.GameService;
 import com.example.footballTournament.service.GroupService;
 import com.example.footballTournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class MainController {
@@ -136,7 +133,7 @@ public class MainController {
         }
         //step 6
         //set teams in this group and save in data base this group
-        group.setTeams(teamService.getAllTeamsByGroupName(group.getId()));
+        group.setTeams(teamService.getAllTeamsByGroupId(group.getId()));
         groupService.updateGroup(group);
     }
 }

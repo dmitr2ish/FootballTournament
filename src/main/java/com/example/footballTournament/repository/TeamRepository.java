@@ -7,7 +7,7 @@ import java.util.List;
 public interface TeamRepository {
     List<Team> getAllTeams();
 
-    List<Team> getAllTeamsByGroupName(Long groupId);
+    List<Team> getAllTeamsByGroupId(Long groupId);
 
     void deleteAllTeams();
 

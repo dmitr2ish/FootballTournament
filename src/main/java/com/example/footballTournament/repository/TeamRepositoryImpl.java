@@ -29,8 +29,8 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Team> getAllTeamsByGroupName(Long groupId) {
-        return entityManager.createQuery("select c from Team c where c.id = :groupId")
+    public List<Team> getAllTeamsByGroupId(Long groupId) {
+        return entityManager.createQuery("select c from Team c where c.idOfGroup = :groupId")
                 .setParameter("groupId", groupId)
                 .getResultList();
     }
