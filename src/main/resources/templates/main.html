@@ -90,7 +90,10 @@
                 $('#teamid').append(
                     "<tr>" +
                     "<th scope=\"col\">Team Name</th>" +
-                    "<th scope=\"col\">Points</th>" +
+                    "<th scope=\"col\">Wins</th>" +
+                    "<th scope=\"col\">Number of draws</th>" +
+                    "<th scope=\"col\">Defeats</th>" +
+                    "<th scope=\"col\">Sum point</th>" +
                     "<th scope=\"col\">Edit</th>" +
                     "<th scope=\"col\">Delete</th>" +
                     "<th scope=\"col\"><button type='button' onclick='closeTeamsInGroup()'>X</button></th>" +
@@ -100,6 +103,12 @@
                     $('#teamid').append(
                         "<tr>" +
                         "<td>" + team.name + "</td>" +
+                        "<td>" + getNumOfWin(team.name) + "</td>" +
+                        "<td>" + getNumOfDraw(team.name) + "</td>" +
+                        "<td>" + getNumOfLose(team.name) + "</td>" +
+                        "<td>" + ((getNumOfWin(team.name) * 3) + getNumOfDraw(team.name)) + "</td>" +
+                        "<td><button type='button' onclick='editTeam()'>Edit</button></td>" +
+                        "<td><button type='button' onclick='deleteTeam()'>Delete</button></td>" +
                         "</tr>"
                     ))
             }
@@ -111,33 +120,42 @@
     }
 
     function getNumOfWin(name) {
+        let result = 0;
         $.ajax({
             type: 'GET',
             url: '/api/game/win/team/' + name,
-            success: function (number) {
-                console.log("win: " + number);
+            async: false,
+            success: function (number1) {
+                result = number1;
             }
         })
+        return result;
     }
 
     function getNumOfLose(name) {
+        let result = 0;
         $.ajax({
             type: 'GET',
             url: '/api/game/lose/team/' + name,
+            async: false,
             success: function (number) {
-                console.log("lose: " + number);
+                result = number;
             }
         })
+        return result;
     }
 
     function getNumOfDraw(name) {
+        let result = 0;
         $.ajax({
             type: 'GET',
             url: '/api/game/draw/team/' + name,
+            async: false,
             success: function (number) {
-                console.log("draw: " + number);
+                result = number;
             }
         })
+        return result;
     }
 
 </script>

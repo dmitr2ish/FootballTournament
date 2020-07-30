@@ -91,12 +91,18 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public Integer getNumOfDraw(String teamName) {
-        return entityManager.createQuery(
+        int drawsWhenFirst = entityManager.createQuery(
                 "select c from Game c WHERE " +
                         "c.winner = 'draw' and " +
-                        "c.firstTeam = :teamName or " +
+                        "c.firstTeam = :teamName")
+                .setParameter("teamName", teamName)
+                .getResultList().size();
+        int drawsWhenSecond = entityManager.createQuery(
+                "select c from Game c WHERE " +
+                        "c.winner = 'draw' and " +
                         "c.secondTeam = :teamName")
                 .setParameter("teamName", teamName)
                 .getResultList().size();
+        return drawsWhenFirst + drawsWhenSecond;
     }
 }
