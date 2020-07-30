@@ -17,24 +17,28 @@
     <tr>
         <th scope="col">id</th>
         <th scope="col">Group Name</th>
+        <th scope="col">Show team</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
 
     <tbody id="groupid">
+        <table border="1px">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Team Name</th>
+            </tr>
+            </thead>
+
+            <tbody id="teamid">
+            </tbody>
+        </table>
     </tbody>
 </table>
 
-<table border="1px">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Team Name</th>
-    </tr>
-    </thead>
 
-    <tbody id="teamid">
-    </tbody>
-</table>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -51,6 +55,7 @@
     $(function () {
         updateGroupList();
         updateTeamInGroupList(1); //TODO переделать на нажатие по кнопке отображение списка команд
+
     })
 
     function updateGroupList() {
@@ -63,6 +68,9 @@
                     $('#groupid').append(
                         "<tr>"+
                         "<td>" + group.id + "</td>" +
+                        "<td>" + group.name + "</td>" +
+                        "<td>" + group.name + "</td>" +
+                        "<td>" + group.name + "</td>" +
                         "<td>" + group.name + "</td>" +
                         "</tr>"
                     ))
@@ -82,7 +90,6 @@
                 teamListInGroup.forEach(team =>
                     $('#teamid').append(
                         "<tr>"+
-                        "<td>" + team.id + "</td>" +
                         "<td>" + team.name + "</td>" +
                         "</tr>"
                     ))
