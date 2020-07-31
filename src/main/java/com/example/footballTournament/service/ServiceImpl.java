@@ -136,4 +136,9 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     public void deleteGroup(Group group) {
         groupRepository.deleteGroup(group);
     }
+
+    @Override
+    public void deleteGroupById(Long id) {
+        groupRepository.deleteGroupById(id);
+    }
 }

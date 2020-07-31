@@ -120,6 +120,24 @@ function editGroup(e) { //update group's object in data base
 
 function deleteGroup(e) {   //delete group's object in data base
     e.preventDefault()
+
+    let group = {
+        id: $('#deleteGroupId').val(),
+        name: $('#deleteGroupName').val()
+    };
+
+
+    $.ajax({
+        url: '/api/group/delete',
+        method: 'DELETE',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(group),
+        complete: function () {
+            $('#delete-modal').modal('hide');
+            updateGroupList();
+        }
+    })
 }
 
 function updateGroupList() {    //update table of group

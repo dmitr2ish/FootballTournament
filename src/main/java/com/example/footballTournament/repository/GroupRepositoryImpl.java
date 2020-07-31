@@ -71,4 +71,11 @@ public class GroupRepositoryImpl implements GroupRepository {
     public void deleteGroup(Group group) {
         entityManager.remove(group);
     }
+
+    @Override
+    public void deleteGroupById(Long id) {
+        entityManager.createQuery("delete from Group c where c.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }

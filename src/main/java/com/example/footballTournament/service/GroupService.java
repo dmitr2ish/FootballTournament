@@ -18,4 +18,6 @@ public interface GroupService {
     Group updateGroup(Group group);
 
     void deleteGroup(Group group);
+
+    void deleteGroupById(Long id);
 }
