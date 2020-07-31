@@ -40,6 +40,8 @@ public class GroupRestController {
 
     @PutMapping("/update")
     public ResponseEntity<Group> updateGroup(@RequestBody Group group) {
+        List<Team> currentTeamList = service.getByGroupId(group.getId()).getTeams();
+        group.setTeams(currentTeamList);
         return (service.updateGroup(group) != null)
                 ? new ResponseEntity<>(group, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -10,8 +10,6 @@ function showTeamInGroupList(id) {
     $('#edit-modal').modal('hide');
     $('#delete-modal').modal('hide');
 
-    console.log('id: ' + id);
-
     $('#teamid').empty();
     $.ajax({
         type: 'GET',
@@ -19,8 +17,6 @@ function showTeamInGroupList(id) {
         dataType: 'json',
         contentType: 'application/json',
         success: function (teamListInGroup) {
-
-            console.log("teamListInGroup: " + teamListInGroup);
 
             $('#teamid').append(
                 "<tr>" +
@@ -52,29 +48,26 @@ function showTeamInGroupList(id) {
 }
 
 //passing an object to the modal window for editing
-function editGroupFrom(id) {
-    console.log(id);
+function editGroupForm(id) {
     $.ajax({
         url: '/api/group/' + id,
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
         success: function (group) {
-            console.log("group: " + group.name);
             $('#editGroupId').val(group.id);
             $('#editGroupName').val(group.name);
 
             $('#editGroupTeams').empty();
             group.teams.forEach(team =>
                 $('#editGroupTeams').append(
+                    "<option style='display: none'>" + team.id + "</option>" +
                     "<option>" + team.name + "</option>"
                 )
             )
 
             $('#edit-footer').empty();
             $('#edit-footer').append(
-                "<button type=\"button\" class=\"btn btn-outline-secondary\" data-dismiss=\"modal\">Close</button>" +
-                "<button type=\"button\" class=\"btn btn-outline-primary\" id=\"editGroupFromModal\">Edit</button>" +
                 "<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"modal\"" +
                 "data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>Edit list of teams</button>"
             )
@@ -86,14 +79,12 @@ function editGroupFrom(id) {
 
 //passing an object to the modal window for deleting
 function deleteGroupForm(id) {
-    console.log(id);
     $.ajax({
         url: '/api/group/' + id,
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
         success: function (group) {
-            console.log("group: " + group.name);
             $('#deleteGroupId').val(group.id);
             $('#deleteGroupName').val(group.name);
             $('#delete-modal').modal('show');
@@ -110,13 +101,9 @@ function editGroup(e) { //update group's object in data base
 
     let group = {
         id: $('#editGroupId').val(),
-        name: $('#editGroupName').val(),
-        teams: []
+        name: $('#editGroupName').val()
     };
 
-    $('#editGroupTeams').find('option:selected').each((i, option) => {
-        group['teams'].push({'name': $(option).val()});
-    })
 
     $.ajax({
         url: '/api/group/update',
@@ -141,14 +128,13 @@ function updateGroupList() {    //update table of group
         type: 'GET',
         url: '/api/group/list',
         success: function (groupList) {
-            console.log(groupList);
             groupList.forEach(group =>
                 $('#groupid').append(
                     "<tr>" +
                     "<td scope=\"col\">" + group.id + "</td>" +
                     "<td scope=\"col\">" + group.name + "</td>" +
                     "<td scope=\"col\"><button type='button' class=\"btn btn-outline-light\" data-toggle=\"modal\" data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>+</button></td>" +
-                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-light\" onclick='editGroupFrom(" + group.id + ")'>edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-light\" onclick='editGroupForm(" + group.id + ")'>edit</button></td>" +
                     "<td scope=\"col\"><button type='button' class=\"btn btn-outline-danger\" onclick='deleteGroupForm(" + group.id + ")'>delete</button></td>" +
                     "</tr>"
                 ))
