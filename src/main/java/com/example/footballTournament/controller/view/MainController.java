@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 //todo выполнить init метод через один запрос в базу данных
+//todo если база данных пуста, высветить пройдите по пути /init для первоначальной инициализации
 @Controller
 public class MainController {
     private GroupService groupService;

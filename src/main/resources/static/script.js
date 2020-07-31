@@ -7,7 +7,11 @@ $(function () {
 
 // displaying group's nested commands in a modal window
 function showTeamInGroupList(id) {
+    $('#edit-modal').modal('hide');
+    $('#delete-modal').modal('hide');
+
     console.log('id: ' + id);
+
     $('#teamid').empty();
     $.ajax({
         type: 'GET',
@@ -59,11 +63,22 @@ function editGroupFrom(id) {
             console.log("group: " + group.name);
             $('#editGroupId').val(group.id);
             $('#editGroupName').val(group.name);
+
             $('#editGroupTeams').empty();
             group.teams.forEach(team =>
                 $('#editGroupTeams').append(
                     "<option>" + team.name + "</option>"
-                ))
+                )
+            )
+
+            $('#edit-footer').empty();
+            $('#edit-footer').append(
+                "<button type=\"button\" class=\"btn btn-outline-secondary\" data-dismiss=\"modal\">Close</button>" +
+                "<button type=\"button\" class=\"btn btn-outline-primary\" id=\"editGroupFromModal\">Edit</button>" +
+                "<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"modal\"" +
+                "data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>Edit list of teams</button>"
+            )
+
             $('#edit-modal').modal('show');
         }
     })
