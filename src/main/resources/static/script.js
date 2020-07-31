@@ -1,15 +1,15 @@
 $(function () {
-    updateGroupList();
-    $('#saveGroupFromModal').on('click', event => saveGroup(event));
-    $('#editGroupFromModal').on('click', event => editGroup(event));
-    $('#deleteGroupFromModal').on('click', event => deleteGroup(event));
+    updateGroupList();  //update table of group
+    $('#saveGroupFromModal').on('click', event => saveGroup(event));    //save group's object in data base
+    $('#editGroupFromModal').on('click', event => editGroup(event));    //update group's object in data base
+    $('#deleteGroupFromModal').on('click', event => deleteGroup(event));    //delete group's object in data base
 })
 
-function saveGroup(e) {
+function saveGroup(e) { //save group's object in data base
     e.preventDefault()
 }
 
-function editGroup(e) {
+function editGroup(e) { //update group's object in data base
     e.preventDefault()
 
     let group = {
@@ -32,11 +32,11 @@ function editGroup(e) {
     })
 }
 
-function deleteGroup(e) {
+function deleteGroup(e) {   //delete group's object in data base
     e.preventDefault()
 }
 
-function updateGroupList() {
+function updateGroupList() {    //update table of group
     $('#groupid').empty();
     $.ajax({
         type: 'GET',
@@ -57,7 +57,7 @@ function updateGroupList() {
     })
 }
 
-function editGroupFrom(id) {
+function editGroupFrom(id) {    //passing an object to the modal window for editing
     console.log(id);
     $.ajax({
         url: '/api/group/' + id,
@@ -73,7 +73,7 @@ function editGroupFrom(id) {
     })
 }
 
-function deleteGroupForm(id) {
+function deleteGroupForm(id) {  //passing an object to the modal window for deleting
     console.log(id);
     $.ajax({
         url: '/api/group/' + id,
@@ -89,7 +89,7 @@ function deleteGroupForm(id) {
     })
 }
 
-function showTeamInGroupList(id) {
+function showTeamInGroupList(id) { //displaying group's nested commands in a modal window
     console.log('id: ' + id);
     $('#teamid').empty();
     $.ajax({
@@ -126,7 +126,7 @@ function showTeamInGroupList(id) {
     })
 }
 
-function getNumOfWin(name) {
+function getNumOfWin(name) { //getting count of team's win
     let result = 0;
     $.ajax({
         type: 'GET',
@@ -139,7 +139,7 @@ function getNumOfWin(name) {
     return result;
 }
 
-function getNumOfLose(name) {
+function getNumOfLose(name) {   //getting count of team's lose
     let result = 0;
     $.ajax({
         type: 'GET',
@@ -152,7 +152,7 @@ function getNumOfLose(name) {
     return result;
 }
 
-function getNumOfDraw(name) {
+function getNumOfDraw(name) { //getting count of team's draw
     let result = 0;
     $.ajax({
         type: 'GET',
