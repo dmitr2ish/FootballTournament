@@ -118,7 +118,8 @@ function editGroup(e) { //update group's object in data base
     })
 }
 
-function deleteGroup(e) {   //delete group's object in data base
+//delete group's object in data base
+function deleteGroup(e) {
     e.preventDefault()
 
     let group = {
