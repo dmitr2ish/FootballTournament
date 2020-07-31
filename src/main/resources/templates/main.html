@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 
@@ -85,6 +85,13 @@
                         <div class="form-group">
                             <label for="editGroupName" class="col-form-label">Group name</label>
                             <input type="text" class="form-control" id="editGroupName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editGroupTeams" class="col-form-label">List of team</label>
+                            <select class="form-control custom-select" size="4"
+                                    id="editGroupTeams"  multiple name="roles">
+                            </select>
                         </div>
                     </form>
 

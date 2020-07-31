@@ -14,7 +14,8 @@ function editGroup(e) { //update group's object in data base
 
     let group = {
         id: $('#editGroupId').val(),
-        name: $('#editGroupName').val()
+        name: $('#editGroupName').val(),
+        // role: $('#ed')
     };
 
     console.log("editGroup: " + group.name)
@@ -68,6 +69,10 @@ function editGroupFrom(id) {    //passing an object to the modal window for edit
             console.log("group: " + group.name);
             $('#editGroupId').val(group.id);
             $('#editGroupName').val(group.name);
+            group.teams.forEach(team =>
+                $('#editGroupTeams').append(
+                    "<option>" + team.name + "</option>"
+                ))
             $('#edit-modal').modal('show');
         }
     })
