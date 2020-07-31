@@ -20,25 +20,25 @@ public class GameRestController {
         this.service = service;
     }
 
-    @GetMapping("/win/team/{name}")
-    public ResponseEntity<Integer> getNumOfWin(@PathVariable(name = "name") String name) {
-        Integer numOfWins = service.getNumOfWins(name);
+    @GetMapping("/win/team/{id}")
+    public ResponseEntity<Integer> getNumOfWin(@PathVariable(name = "id") Long id) {
+        Integer numOfWins = service.getNumOfWins(id);
         return (numOfWins != null)
                 ? new ResponseEntity<>(numOfWins, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/draw/team/{name}")
-    public ResponseEntity<Integer> getNumOfDraw(@PathVariable(name = "name") String name) {
-        Integer numOfDraw = service.getNumOfDraw(name);
+    @GetMapping("/draw/team/{id}")
+    public ResponseEntity<Integer> getNumOfDraw(@PathVariable(name = "id") Long id) {
+        Integer numOfDraw = service.getNumOfDraw(id);
         return (numOfDraw != null)
                 ? new ResponseEntity<>(numOfDraw, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/lose/team/{name}")
-    public ResponseEntity<Integer> getNumOfLose(@PathVariable(name = "name") String name) {
-        Integer numOfLose = service.getNumOfLose(name);
+    @GetMapping("/lose/team/{id}")
+    public ResponseEntity<Integer> getNumOfLose(@PathVariable(name = "id") Long id) {
+        Integer numOfLose = service.getNumOfLose(id);
         return (numOfLose != null)
                 ? new ResponseEntity<>(numOfLose, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

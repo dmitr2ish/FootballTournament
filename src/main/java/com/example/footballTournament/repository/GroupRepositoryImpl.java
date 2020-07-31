@@ -21,7 +21,6 @@ public class GroupRepositoryImpl implements GroupRepository {
         log = Logger.getLogger(GroupRepositoryImpl.class.getName());
     }
 
-
     @Override
     @SuppressWarnings("unchecked")
     public List<Group> getAllGroups() {
@@ -39,6 +38,13 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
+    public Group getByGroupName(String name) {
+        return (Group) entityManager.createQuery("select c from Group c where c.name = :name")
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
+    @Override
     @Transactional
     public Group saveGroup(Group group) {
         try {
@@ -51,8 +57,14 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
-    public void updateGroup(Group group) {
-        entityManager.merge(group);
+    public Group updateGroup(Group group) {
+        try {
+            entityManager.merge(group);
+            entityManager.flush();
+        } catch (Exception e) {
+            log.warning("EXCEPTION IN UPDATE METHOD, GROUP: " + group.getId() + ", " + e);
+        }
+        return group;
     }
 
     @Override

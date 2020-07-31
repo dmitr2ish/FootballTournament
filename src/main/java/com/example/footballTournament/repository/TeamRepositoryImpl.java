@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
+
 //TODO сделать с роллбэками и логгером на экзепшенах во всех имплементациях
 @Repository
 public class TeamRepositoryImpl implements TeamRepository {
@@ -57,7 +58,13 @@ public class TeamRepositoryImpl implements TeamRepository {
     }
 
     @Override
-    public void updateTeam(Team team) {
-        entityManager.merge(team);
+    public Team updateTeam(Team team) {
+        try {
+            entityManager.merge(team);
+            entityManager.flush();
+        } catch (Exception e) {
+            log.warning("EXCEPTION IN ADD METHOD, TEAM: " + team.getId() + ", " + e);
+        }
+        return team;
     }
 }

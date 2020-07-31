@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -8,12 +8,6 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
-
-    <style>
-        .container-hidden {
-            display: none;
-        }
-    </style>
 
     <title>Football Tournament</title>
 </head>
@@ -76,7 +70,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/api/group/update" id="editForm" method="post">
+                    <form action="/api/group/update" id="editForm" method="put">
                         <div class="form-group">
                             <label for="editGroupId" class="col-form-label">Id</label>
                             <input type="text" class="form-control" id="editGroupId" readonly="readonly">

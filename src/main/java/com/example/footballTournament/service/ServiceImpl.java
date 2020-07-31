@@ -28,48 +28,18 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
-    public List<Group> getAllGroups() {
-        return groupRepository.getAllGroups();
-    }
-
-    @Override
-    public void deleteAllGroups() {
-        groupRepository.deleteAllGroups();
-    }
-
-    @Override
-    public void deleteGroup(Group group) {
-        groupRepository.deleteGroup(group);
-    }
-
-    @Override
-    public Group getByGroupId(Long id) {
-        return groupRepository.getByGroupId(id);
-    }
-
-    @Override
-    public Group saveGroup(Group group) {
-        return groupRepository.saveGroup(group);
-    }
-
-    @Override
-    public void updateGroup(Group group) {
-        groupRepository.updateGroup(group);
-    }
-
-    @Override
     public List<Game> getAllGames() {
         return gameRepository.getAllGames();
     }
 
     @Override
-    public List<Game> getAllGamesByTeamName(String teamName) {
-        return gameRepository.getAllGamesByTeamName(teamName);
+    public List<Game> getAllGamesByTeamId(Long teamId) {
+        return gameRepository.getAllGamesByTeamId(teamId);
     }
 
     @Override
     public void deleteAllGames() {
-        gameRepository.deleteAllGames();
+        gameRepository.getAllGames();
     }
 
     @Override
@@ -83,33 +53,33 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
-    public void updateGame(Game game) {
-        gameRepository.updateGame(game);
+    public Game updateGame(Game game) {
+        return gameRepository.updateGame(game);
     }
 
     @Override
-    public Integer getNumOfWins(String teamName) {
-        return gameRepository.getNumOfWins(teamName);
+    public Integer getNumOfWins(Long teamId) {
+        return gameRepository.getNumOfWins(teamId);
     }
 
     @Override
-    public Integer getNumOfLose(String teamName) {
-        return gameRepository.getNumOfLose(teamName);
+    public Integer getNumOfLose(Long teamId) {
+        return gameRepository.getNumOfLose(teamId);
     }
 
     @Override
-    public Integer getNumOfDraw(String teamName) {
-        return gameRepository.getNumOfDraw(teamName);
-    }
-
-    @Override
-    public List<Team> getAllTeamsByGroupId(Long groupId) {
-        return teamRepository.getAllTeamsByGroupId(groupId);
+    public Integer getNumOfDraw(Long teamId) {
+        return gameRepository.getNumOfDraw(teamId);
     }
 
     @Override
     public List<Team> getAllTeams() {
         return teamRepository.getAllTeams();
+    }
+
+    @Override
+    public List<Team> getAllTeamsByGroupId(Long groupId) {
+        return teamRepository.getAllTeamsByGroupId(groupId);
     }
 
     @Override
@@ -128,7 +98,42 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
-    public void updateTeam(Team team) {
-        teamRepository.updateTeam(team);
+    public Team updateTeam(Team team) {
+        return teamRepository.updateTeam(team);
+    }
+
+    @Override
+    public List<Group> getAllGroups() {
+        return groupRepository.getAllGroups();
+    }
+
+    @Override
+    public void deleteAllGroups() {
+        groupRepository.deleteAllGroups();
+    }
+
+    @Override
+    public Group getByGroupId(Long id) {
+        return groupRepository.getByGroupId(id);
+    }
+
+    @Override
+    public Group getByGroupName(String name) {
+        return groupRepository.getByGroupName(name);
+    }
+
+    @Override
+    public Group saveGroup(Group group) {
+        return groupRepository.saveGroup(group);
+    }
+
+    @Override
+    public Group updateGroup(Group group) {
+        return groupRepository.updateGroup(group);
+    }
+
+    @Override
+    public void deleteGroup(Group group) {
+        groupRepository.deleteGroup(group);
     }
 }

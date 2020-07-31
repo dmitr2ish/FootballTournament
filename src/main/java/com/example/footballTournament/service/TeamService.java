@@ -5,9 +5,9 @@ import com.example.footballTournament.entity.Team;
 import java.util.List;
 
 public interface TeamService {
-    List<Team> getAllTeamsByGroupId(Long groupId);
-
     List<Team> getAllTeams();
+
+    List<Team> getAllTeamsByGroupId(Long groupId);
 
     void deleteAllTeams();
 
@@ -15,5 +15,5 @@ public interface TeamService {
 
     Team saveTeam(Team team);
 
-    void updateTeam(Team team);
+    Team updateTeam(Team team);
 }

@@ -9,11 +9,13 @@ public interface GroupService {
 
     void deleteAllGroups();
 
-    void deleteGroup(Group group);
-
     Group getByGroupId(Long id);
+
+    Group getByGroupName(String name);
 
     Group saveGroup(Group group);
 
-    void updateGroup(Group group);
+    Group updateGroup(Group group);
+
+    void deleteGroup(Group group);
 }

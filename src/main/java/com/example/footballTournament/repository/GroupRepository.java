@@ -11,9 +11,11 @@ public interface GroupRepository {
 
     Group getByGroupId(Long id);
 
+    Group getByGroupName(String name);
+
     Group saveGroup(Group group);
 
-    void updateGroup(Group group);
+    Group updateGroup(Group group);
 
     void deleteGroup(Group group);
 }

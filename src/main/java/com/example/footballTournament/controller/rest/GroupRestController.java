@@ -40,8 +40,9 @@ public class GroupRestController {
 
     @PutMapping("/update")
     public ResponseEntity<Group> updateGroup(@RequestBody Group group) {
-        service.updateGroup(group);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return (service.updateGroup(group) != null)
+                ? new ResponseEntity<>(group, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete")
@@ -53,7 +54,8 @@ public class GroupRestController {
     //show all teams in current group by id
     @GetMapping("/team/{id}")
     public ResponseEntity<List<Team>> getAllTeamInGroup(@PathVariable(name = "id") Long id) {
-        List<Team> teamList = service.getByGroupId(id).getTeams();
+        Group group = service.getByGroupId(id);
+        List<Team> teamList = group.getTeams();
         return (teamList != null && !teamList.isEmpty())
                 ? new ResponseEntity<>(teamList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//todo выполнить init метод через один запрос в базу данных
 @Controller
 public class MainController {
     private GroupService groupService;
@@ -29,7 +29,7 @@ public class MainController {
 
     @GetMapping("/init")
     public String backDoorInit() {
-        //Creating 12 names of teams
+        // Creating a list of 12 team names
         List<String> teamsFromLorOfTheRing = new ArrayList<>();
         teamsFromLorOfTheRing.add("Orks");
         teamsFromLorOfTheRing.add("Hobbits from Shir");
@@ -97,19 +97,38 @@ public class MainController {
     /* This method is the helper for backDoorInit creates a group, teams, games within the group,
      * each team plays with each and saves to the database.
      */
-    private void createGroup(String groupName, List<String> teamList) {
+    private void createGroup(String groupName, List<String> teamNameList) {
         //step 1
-        // creating a group in the database, because we need its ID to use it for  link the group and the command
-        Group group = groupService.saveGroup(new Group(groupName, null));
+        // creating a group in the database, because we need its ID to use it for link the group and the command
+        List<Team> tempTeamList = new ArrayList<>();
+        groupService.saveGroup(new Group(groupName, tempTeamList));
+        Group group = groupService.getByGroupName(groupName);
+
         //step 2
+        //creating a collection of teams whitout id and games
+        List<Team> teamList = new ArrayList<>();
+        for (String teamName : teamNameList) {
+            teamList.add(new Team(teamName, null, group.getId()));
+        }
+        //saved in the database to get the ID
+        for (Team team : teamList) {
+            teamService.saveTeam(team);
+        }
+        //get collection with id from db
+        teamList = teamService.getAllTeamsByGroupId(group.getId());
+
+        //step 3
         //creating list of 6 games in group where winner is first team
+        //according to the task
+        // " Within the group, each team plays with each, i.e. we have 6 games in each group.
+        // The match can ONLY be between teams in the same group."
         List<Game> gameList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int k = 0; k < 4; k++) {
                 gameList.add(new Game(
-                        teamList.get(i),    //firstTeam
-                        teamList.get(k),    //secondTeam
-                        teamList.get(i)));  //winner
+                        teamList.get(i).getId(),    //firstTeam
+                        teamList.get(k).getId(),    //secondTeam
+                        teamList.get(i).getId()));  //winner
             }
         }
         //step 3
@@ -117,20 +136,18 @@ public class MainController {
         for (Game game : gameList) {
             gameService.saveGame(game);
         }
+
         //step 4
-        //creating list of 4 teams from one group
-        List<Team> teamListGroup = new ArrayList<>();
-        for (String teamName : teamList) {
-            teamListGroup.add(new Team(
-                    teamName,
-                    gameService.getAllGamesByTeamName(teamName),
-                    group.getId()));
+        //set list of games to team by team id
+        for(Team team : teamList) {
+            team.setGameList(gameService.getAllGamesByTeamId(team.getId()));
         }
-        //step 5
-        //saving team in database
-        for (Team teamName : teamListGroup) {
-            teamService.saveTeam(teamName);
+
+        //update data in base
+        for (Team team : teamList) {
+            teamService.updateTeam(team);
         }
+
         //step 6
         //set teams in this group and save in data base this group
         group.setTeams(teamService.getAllTeamsByGroupId(group.getId()));

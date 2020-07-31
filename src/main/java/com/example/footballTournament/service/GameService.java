@@ -7,7 +7,7 @@ import java.util.List;
 public interface GameService {
     List<Game> getAllGames();
 
-    List<Game> getAllGamesByTeamName(String teamName);
+    List<Game> getAllGamesByTeamId(Long teamId);
 
     void deleteAllGames();
 
@@ -15,11 +15,11 @@ public interface GameService {
 
     Game saveGame(Game game);
 
-    void updateGame(Game game);
+    Game updateGame(Game game);
 
-    Integer getNumOfWins(String teamName);
+    Integer getNumOfWins(Long teamId);
 
-    Integer getNumOfLose(String teamName);
+    Integer getNumOfLose(Long teamId);
 
-    Integer getNumOfDraw(String teamName);
+    Integer getNumOfDraw(Long teamId);
 }

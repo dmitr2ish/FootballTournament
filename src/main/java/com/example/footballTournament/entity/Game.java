@@ -8,18 +8,17 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstTeam;
-    private String secondTeam;
-
-    private String winner;
+    private Long firstTeamId;
+    private Long secondTeamId;
+    private Long winnerId;
 
     public Game() {
     }
 
-    public Game(String firstTeam, String secondTeam, String winner) {
-        this.firstTeam = firstTeam;
-        this.secondTeam = secondTeam;
-        this.winner = winner;
+    public Game(Long firstTeamId, Long secondTeamId, Long winnerId) {
+        this.firstTeamId = firstTeamId;
+        this.secondTeamId = secondTeamId;
+        this.winnerId = winnerId;
     }
 
     public Long getId() {
@@ -30,27 +29,27 @@ public class Game {
         this.id = id;
     }
 
-    public String getFirstTeam() {
-        return firstTeam;
+    public Long getFirstTeamId() {
+        return firstTeamId;
     }
 
-    public void setFirstTeam(String firstTeam) {
-        this.firstTeam = firstTeam;
+    public void setFirstTeamId(Long firstTeamId) {
+        this.firstTeamId = firstTeamId;
     }
 
-    public String getSecondTeam() {
-        return secondTeam;
+    public Long getSecondTeamId() {
+        return secondTeamId;
     }
 
-    public void setSecondTeam(String secondTeam) {
-        this.secondTeam = secondTeam;
+    public void setSecondTeamId(Long secondTeamId) {
+        this.secondTeamId = secondTeamId;
     }
 
-    public String getWinner() {
-        return winner;
+    public Long getWinnerId() {
+        return winnerId;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public void setWinnerId(Long winnerId) {
+        this.winnerId = winnerId;
     }
 }
