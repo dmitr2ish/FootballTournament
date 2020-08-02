@@ -40,8 +40,8 @@ function showTeamInGroupList(id) {
                     "<td scope=\"col\">" + getNumOfDraw(team.id) + "</td>" +
                     "<td scope=\"col\">" + getNumOfLose(team.id) + "</td>" +
                     "<td scope=\"col\">" + ((getNumOfWin(team.id) * 3) + getNumOfDraw(team.id)) + "</td>" +
-                    "<td scope=\"col\"><button type='button' onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
-                    "<td scope=\"col\"><button type='button' onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
                     "</tr>"
                 )
             )
@@ -103,7 +103,7 @@ function editGroupForm(id) {
 
             $('#edit-footer').empty();
             $('#edit-footer').append(
-                "<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"modal\"" +
+                "<button type=\"button\" class=\"btn btn-outline-dark\" data-toggle=\"modal\"" +
                 "data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>Edit list of teams</button>"
             )
 
@@ -232,8 +232,8 @@ function updateGroupList() {    //update table of group
                     "<tr>" +
                     "<td scope=\"col\">" + group.id + "</td>" +
                     "<td scope=\"col\">" + group.name + "</td>" +
-                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-light\" data-toggle=\"modal\" data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>+</button></td>" +
-                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-light\" onclick='editGroupForm(" + group.id + ")'>edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-dark\" data-toggle=\"modal\" data-target=\"#exampleModal\" onclick='showTeamInGroupList(" + group.id + ")'>+</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-outline-dark\" onclick='editGroupForm(" + group.id + ")'>edit</button></td>" +
                     "<td scope=\"col\"><button type='button' class=\"btn btn-outline-danger\" onclick='deleteGroupForm(" + group.id + ")'>delete</button></td>" +
                     "</tr>"
                 ))
@@ -269,8 +269,8 @@ function updateTeamListFromEditTeam(teamId) {
                     "<td scope=\"col\">" + getNumOfDraw(team.id) + "</td>" +
                     "<td scope=\"col\">" + getNumOfLose(team.id) + "</td>" +
                     "<td scope=\"col\">" + ((getNumOfWin(team.id) * 3) + getNumOfDraw(team.id)) + "</td>" +
-                    "<td scope=\"col\"><button type='button' onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
-                    "<td scope=\"col\"><button type='button' onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
                     "</tr>"
                 )
             )
@@ -306,8 +306,8 @@ function updateTeamList(GoupId) {
                     "<td scope=\"col\">" + getNumOfDraw(team.id) + "</td>" +
                     "<td scope=\"col\">" + getNumOfLose(team.id) + "</td>" +
                     "<td scope=\"col\">" + ((getNumOfWin(team.id) * 3) + getNumOfDraw(team.id)) + "</td>" +
-                    "<td scope=\"col\"><button type='button' onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
-                    "<td scope=\"col\"><button type='button' onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' class=\"btn btn-dark\" onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
                     "</tr>"
                 )
             )
