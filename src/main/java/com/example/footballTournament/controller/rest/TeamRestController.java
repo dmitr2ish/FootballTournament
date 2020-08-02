@@ -39,9 +39,18 @@ public class TeamRestController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/teamsGroup/{id}")
-    public ResponseEntity<List<Team>> getAllTeamInOneGroup(@PathVariable(name = "id") Long id) {
+    @GetMapping("/teamsIdGroup/{id}")
+    public ResponseEntity<List<Team>> getAllTeamInOneGroupByIdGroup(@PathVariable(name = "id") Long id) {
         List<Team> teamList = groupService.getByGroupId(id).getTeams();
+        return !teamList.isEmpty()
+                ? new ResponseEntity<>(teamList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/teamsIdTeam/{id}")
+    public ResponseEntity<List<Team>> getAllTeamInOneGroupByIdTeam(@PathVariable(name = "id") Long id) {
+        Team currentTeam = service.getByTeamId(id);
+        List<Team> teamList = groupService.getByGroupId(currentTeam.getIdOfGroup()).getTeams();
         return !teamList.isEmpty()
                 ? new ResponseEntity<>(teamList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
