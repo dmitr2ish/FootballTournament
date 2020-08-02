@@ -38,8 +38,8 @@ function showTeamInGroupList(id) {
                     "<td scope=\"col\">" + getNumOfDraw(team.id) + "</td>" +
                     "<td scope=\"col\">" + getNumOfLose(team.id) + "</td>" +
                     "<td scope=\"col\">" + ((getNumOfWin(team.id) * 3) + getNumOfDraw(team.id)) + "</td>" +
-                    "<td scope=\"col\"><button type='button' onclick='editTeam()'>Edit</button></td>" +
-                    "<td scope=\"col\"><button type='button' onclick='deleteTeam()'>Delete</button></td>" +
+                    "<td scope=\"col\"><button type='button' onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
                     "</tr>"
                 )
             )
@@ -47,7 +47,14 @@ function showTeamInGroupList(id) {
     })
 }
 
-//passing an object to the modal window for editing
+//passing an object Team to the modal window for editing
+function editTeamForm(id) {
+    $.ajax({
+
+    })
+}
+
+//passing an object Group to the modal window for editing
 function editGroupForm(id) {
     $.ajax({
         url: '/api/group/' + id,

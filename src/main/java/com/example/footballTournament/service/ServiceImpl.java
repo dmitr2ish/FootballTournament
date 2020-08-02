@@ -88,6 +88,11 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        teamRepository.deleteById(id);
+    }
+
+    @Override
     public Team getByTeamId(Long id) {
         return teamRepository.getByTeamId(id);
     }

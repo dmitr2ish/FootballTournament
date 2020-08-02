@@ -42,6 +42,13 @@ public class TeamRepositoryImpl implements TeamRepository {
     }
 
     @Override
+    public void deleteById(Long id) {
+        entityManager.createQuery("delete from Team c where c.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Override
     public Team getByTeamId(Long id) {
         return entityManager.find(Team.class, id);
     }

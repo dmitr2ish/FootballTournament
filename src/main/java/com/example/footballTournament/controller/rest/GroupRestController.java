@@ -48,7 +48,7 @@ public class GroupRestController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Group> deleteGroup(@RequestBody Group group) {
+    public ResponseEntity<?> deleteGroup(@RequestBody Group group) {
         service.deleteGroupById(group.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -11,6 +11,8 @@ public interface TeamService {
 
     void deleteAllTeams();
 
+    void deleteById(Long id);
+
     Team getByTeamId(Long id);
 
     Team saveTeam(Team team);
