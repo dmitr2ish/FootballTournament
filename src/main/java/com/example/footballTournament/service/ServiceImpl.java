@@ -38,8 +38,18 @@ public class ServiceImpl implements GroupService, GameService, TeamService {
     }
 
     @Override
+    public boolean isExist(Long id) {
+        return gameRepository.isExist(id);
+    }
+
+    @Override
     public void deleteAllGames() {
         gameRepository.getAllGames();
+    }
+
+    @Override
+    public void deleteGameById(Long id) {
+        gameRepository.deleteById(id);
     }
 
     @Override

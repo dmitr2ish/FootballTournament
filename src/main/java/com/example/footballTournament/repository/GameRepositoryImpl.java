@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
 
+//TODO сделать с роллбэками и логгером на экзепшенах во всех имплементациях
 
 @Repository
 public class GameRepositoryImpl implements GameRepository {
@@ -36,8 +37,25 @@ public class GameRepositoryImpl implements GameRepository {
     }
 
     @Override
+    public boolean isExist(Long id) {
+        List<Integer> result = entityManager.createQuery("select c from Game c where c.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+        return !result.isEmpty()
+                ? true
+                : false;
+    }
+
+    @Override
     public void deleteAllGames() {
         entityManager.createQuery("delete from Game ");
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        entityManager.createQuery("delete from Game c where c.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override

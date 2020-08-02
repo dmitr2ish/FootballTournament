@@ -9,7 +9,11 @@ public interface GameService {
 
     List<Game> getAllGamesByTeamId(Long teamId);
 
+    boolean isExist(Long id);
+
     void deleteAllGames();
+
+    void deleteGameById(Long id);
 
     Game getByGameId(Long id);
 

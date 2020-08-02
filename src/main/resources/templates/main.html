@@ -50,10 +50,10 @@
 
                     </table>
                 </div>
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--                </div>-->
+                <!--                <div class="modal-footer">-->
+                <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="editGroupTeams" class="col-form-label">List of team</label>
                             <select class="form-control custom-select" size="4"
-                                    id="editGroupTeams"  multiple name="teams" disabled>
+                                    id="editGroupTeams" multiple name="teams" disabled>
                             </select>
                         </div>
                     </form>
@@ -99,13 +99,47 @@
         </div>
     </div>
 
+    <!-- edit team modal -->
+    <div class="modal fade" id="edit-team-modal" tabindex="-1" role="dialog" aria-labelledby="edit-team"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-team">Edit group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/api/team/update/" id="editTeamForm" method="put">
+                        <div class="form-group">
+                            <label for="editTeamId" class="col-form-label">Id</label>
+                            <input type="text" class="form-control" id="editTeamId" readonly="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editTeamName" class="col-form-label">Team name</label>
+                            <input type="text" class="form-control" id="editTeamName">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-primary" id="editTeamFromModal">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- delete group modal -->
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-group"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete-group">Delete group</h5>
+                    <h5 class="modal-title" id="delete-group">Are you sure you want to delete it?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -135,6 +169,41 @@
     </div>
 </div>
 
+<!-- delete team modal -->
+<div class="modal fade" id="delete-team-modal" tabindex="-1" role="dialog" aria-labelledby="delete-team"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-team">Are you sure you want to delete it?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form action="/api/team/delete" id="deleteTeamForm" method="delete">
+                    <div class="form-group">
+                        <label for="deleteGroupId" class="col-form-label">Id</label>
+                        <input type="text" class="form-control" id="deleteTeamId" readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deleteGroupName" class="col-form-label">Group name</label>
+                        <input type="text" class="form-control" id="deleteTeamName" readonly="readonly">
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="deleteTeamFromModal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"

@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 //todo выполнить init метод через один запрос в базу данных
 //todo если база данных пуста, высветить пройдите по пути /init для первоначальной инициализации
+
 @Controller
 public class MainController {
     private GroupService groupService;
@@ -140,7 +142,7 @@ public class MainController {
 
         //step 4
         //set list of games to team by team id
-        for(Team team : teamList) {
+        for (Team team : teamList) {
             team.setGameList(gameService.getAllGamesByTeamId(team.getId()));
         }
 

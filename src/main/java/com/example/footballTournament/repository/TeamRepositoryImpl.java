@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 //TODO сделать с роллбэками и логгером на экзепшенах во всех имплементациях
+
 @Repository
 public class TeamRepositoryImpl implements TeamRepository {
 

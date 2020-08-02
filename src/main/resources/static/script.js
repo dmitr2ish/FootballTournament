@@ -3,6 +3,8 @@ $(function () {
     $('#saveGroupFromModal').on('click', event => saveGroup(event));    //save group's object in data base
     $('#editGroupFromModal').on('click', event => editGroup(event));    //update group's object in data base
     $('#deleteGroupFromModal').on('click', event => deleteGroup(event));    //delete group's object in data base
+    $('#editTeamFromModal').on('click', event => editTeam(event));
+    $('#deleteTeamFromModal').on('click', event => deleteTeam(event));
 })
 
 // displaying group's nested commands in a modal window
@@ -50,7 +52,33 @@ function showTeamInGroupList(id) {
 //passing an object Team to the modal window for editing
 function editTeamForm(id) {
     $.ajax({
+        url: '/api/team/' + id,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (team) {
+            $('#editTeamId').val(team.id);
+            $('#editTeamName').val(team.name);
 
+            $('#edit-team-modal').modal('show');
+        }
+    })
+}
+
+//passing an object Team to the modal window for editing
+function deleteTeamForm(id) {
+    $.ajax({
+        url: '/api/team/' + id,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (team) {
+            console.log(team.id);
+            $('#deleteTeamId').val(team.id);
+            $('#deleteTeamName').val(team.name);
+
+            $('#delete-team-modal').modal('show');
+        }
     })
 }
 
@@ -103,6 +131,51 @@ function saveGroup(e) { //save group's object in data base
     e.preventDefault()
 }
 
+function editTeam(e) {
+    e.preventDefault();
+
+    let team = {
+        id: $('#editTeamId').val(),
+        name: $('#editTeamName').val()
+    }
+
+    $.ajax({
+        url: '/api/team/update',
+        method: 'PUT',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(team),
+        complete: function () {
+            $('#edit-team-modal').modal('hide');
+            updateTeamList(team.id);
+        }
+    })
+}
+
+function deleteTeam(e) {
+    e.preventDefault()
+
+    let team = {
+        id: $('#deleteTeamId').val(),
+        name: $('#deleteTeamName').val()
+    };
+
+    console.log(team.id);
+
+    $.ajax({
+        url: '/api/team/delete',
+        method: 'DELETE',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(team),
+        complete: function () {
+            $('#delete-team-modal').modal('hide');
+            updateTeamList(team.id);
+        }
+    })
+}
+
+
 function editGroup(e) { //update group's object in data base
     e.preventDefault()
 
@@ -110,7 +183,6 @@ function editGroup(e) { //update group's object in data base
         id: $('#editGroupId').val(),
         name: $('#editGroupName').val()
     };
-
 
     $.ajax({
         url: '/api/group/update',
@@ -164,6 +236,44 @@ function updateGroupList() {    //update table of group
                     "<td scope=\"col\"><button type='button' class=\"btn btn-outline-danger\" onclick='deleteGroupForm(" + group.id + ")'>delete</button></td>" +
                     "</tr>"
                 ))
+        }
+    })
+}
+
+function updateTeamList(id) {
+    $('#teamid').empty();
+    console.log("updateTeamList(" + id + ")");
+    $.ajax({
+        type: 'GET',
+        url: '/api/team/teamsGroup/' + id,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (teamList) {
+            $('#teamid').append(
+                "<tr>" +
+                "<th scope=\"col\">Team Name</th>" +
+                "<th scope=\"col\">Wins</th>" +
+                "<th scope=\"col\">Number of draws</th>" +
+                "<th scope=\"col\">Defeats</th>" +
+                "<th scope=\"col\">Sum point</th>" +
+                "<th scope=\"col\">Edit</th>" +
+                "<th scope=\"col\">Delete</th>" +
+                "</tr>"
+            )
+
+            teamList.forEach(team =>
+                $('#teamid').append(
+                    "<tr>" +
+                    "<td scope=\"col\">" + team.name + "</td>" +
+                    "<td scope=\"col\">" + getNumOfWin(team.id) + "</td>" +
+                    "<td scope=\"col\">" + getNumOfDraw(team.id) + "</td>" +
+                    "<td scope=\"col\">" + getNumOfLose(team.id) + "</td>" +
+                    "<td scope=\"col\">" + ((getNumOfWin(team.id) * 3) + getNumOfDraw(team.id)) + "</td>" +
+                    "<td scope=\"col\"><button type='button' onclick='editTeamForm(" + team.id + ")'>Edit</button></td>" +
+                    "<td scope=\"col\"><button type='button' onclick='deleteTeamForm(" + team.id + ")'>Delete</button></td>" +
+                    "</tr>"
+                )
+            )
         }
     })
 }

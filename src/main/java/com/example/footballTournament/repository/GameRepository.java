@@ -9,7 +9,11 @@ public interface GameRepository {
 
     List<Game> getAllGamesByTeamId(Long teamId);
 
+    boolean isExist(Long id);
+
     void deleteAllGames();
+
+    void deleteById(Long id);
 
     Game getByGameId(Long id);
 
