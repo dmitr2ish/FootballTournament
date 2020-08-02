@@ -11,7 +11,7 @@ public class Team {
     private Long id;
     private String name;
     private Long idOfGroup;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "ft_game_team",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))

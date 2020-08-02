@@ -41,9 +41,7 @@ public class TeamRestController {
 
     @GetMapping("/teamsGroup/{id}")
     public ResponseEntity<List<Team>> getAllTeamInOneGroup(@PathVariable(name = "id") Long id) {
-        Team team = service.getByTeamId(id);
-        Long groupNumber = team.getIdOfGroup();
-        List<Team> teamList = groupService.getByGroupId(groupNumber).getTeams();
+        List<Team> teamList = groupService.getByGroupId(id).getTeams();
         return !teamList.isEmpty()
                 ? new ResponseEntity<>(teamList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

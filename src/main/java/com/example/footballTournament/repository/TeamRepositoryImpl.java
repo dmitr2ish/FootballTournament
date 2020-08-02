@@ -44,9 +44,12 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     @Override
     public void deleteById(Long id) {
-        entityManager.createQuery("delete from Team c where c.id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
+        String sql = "delete from ft_teams where id = " + id;
+
+        entityManager.createNativeQuery("set FOREIGN_KEY_CHECKS=0").executeUpdate();
+        entityManager.createNativeQuery(sql).executeUpdate();
+        entityManager.createNativeQuery("set FOREIGN_KEY_CHECKS=1").executeUpdate();
+
     }
 
     @Override

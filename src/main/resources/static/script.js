@@ -76,7 +76,7 @@ function deleteTeamForm(id) {
             console.log(team.id);
             $('#deleteTeamId').val(team.id);
             $('#deleteTeamName').val(team.name);
-
+            $('#deleteGroupIdInTeamModal').val(team.idOfGroup);
             $('#delete-team-modal').modal('show');
         }
     })
@@ -157,10 +157,11 @@ function deleteTeam(e) {
 
     let team = {
         id: $('#deleteTeamId').val(),
-        name: $('#deleteTeamName').val()
+        name: $('#deleteTeamName').val(),
+        idOfGroup: $('#deleteGroupIdInTeamModal').val()
     };
 
-    console.log(team.id);
+    console.log(team.idOfGroup);
 
     $.ajax({
         url: '/api/team/delete',
@@ -170,7 +171,7 @@ function deleteTeam(e) {
         data: JSON.stringify(team),
         complete: function () {
             $('#delete-team-modal').modal('hide');
-            updateTeamList(team.id);
+            updateTeamList(team.idOfGroup);
         }
     })
 }

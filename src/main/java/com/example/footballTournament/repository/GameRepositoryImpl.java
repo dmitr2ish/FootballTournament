@@ -53,9 +53,11 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public void deleteById(Long id) {
+        entityManager.createNativeQuery("set FOREIGN_KEY_CHECKS=0").executeUpdate();
         entityManager.createQuery("delete from Game c where c.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
+        entityManager.createNativeQuery("set FOREIGN_KEY_CHECKS=1").executeUpdate();
     }
 
     @Override
